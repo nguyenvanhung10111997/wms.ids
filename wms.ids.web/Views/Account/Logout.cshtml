@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+@model LogoutViewModel
+
+<html>
+<head class="smart-style-3">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WMS Identity Server</title>
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="msvalidate.01" content="0E596E8B2F373A9DA784A34E2D4483F1">
+    <meta name="ICBM" content="10.770922,106.672901">
+    <meta name="robots" content="index,follow">
+    <meta name="RATING" content="GENERAL">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/base/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/base/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/base/css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/base/css/smartadmin-skins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/wms/css/name_icon.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/wms/css/page_style.css">
+    <link rel="icon" href="/images/wms_icon.png" type="image/x-icon">
+
+    <link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="/lib/content/themes/base/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="/lib/content/themes/base/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="/lib/content/themes/base/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+    <style>
+        .hero {
+            /*background-image: url("../img/gradient/login.png");
+            background-position: 0 137px;
+            background-repeat: no-repeat;*/
+            float: left;
+            height: 360px;
+            width: 100%;
+        }
+
+        .list-inline {
+            padding-left: 0;
+            list-style: none;
+            margin: 10px 0 0 -5px;
+        }
+
+        h5.about-heading {
+            color: #565656;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 24px;
+            margin: 0 0 5px;
+        }
+
+        .btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled].active, .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+            background-color: #5ebfe6;
+            border-color: #f0f1f3;
+        }
+    </style>
+</head>
+<body class="animated smart-style-3">
+    <header id="header">
+    </header>
+    <!-- MAIN CONTENT -->
+    <div id="content" class="container" style="padding:32px 14px">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4 col-lg-4 hidden-sm hidden-xs">
+                <img alt="image" src="/lib/content/themes/base/img/logout.png" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <h3 class="text-primary">Bạn muốn thoát khỏi hệ thống?</h3>
+                <form asp-action="Logout">
+                    <input type="hidden" name="logoutId" value="@Model.LogoutId" />
+                    <div class="form-group">
+                        <button class="btn btn-primary">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>       
+    </div>
+</body>
+</html>
+
+

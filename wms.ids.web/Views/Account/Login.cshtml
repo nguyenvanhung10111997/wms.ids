@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+@model LoginViewModel
+<head>
+    <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=11">
+    <title> WMS Identity Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/wms/css/bootstrap.min.css">
+    <link href="/lib/content/themes/wms/css/animate.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/wms/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/login.css?v=1">
+    <link rel="shortcut icon" href="/images/wms_icon.png" type="image/x-icon">
+    <link rel="icon" href="/images/wms_icon.png" type="image/x-icon">
+
+    <script src='https://www.google.com/recaptcha/api.js?hl=vi'></script>
+    <script src='https://www.google.com/recaptcha/api.js?render=6LdAUzkdAAAAAPd0kmbf0Wfwb7wc5HAJo6s9geA5'></script>
+    <script src="~/lib/angular/angular.1.2.13.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body class="login-page" style="background-image:url('/images/wms_ids_bg.svg');background-position:center">
+    <partial name="_ValidationSummary" />
+    <div class="container">
+        <div class="box-login">
+            <div id="login-logo" class="col-md-12">
+                <img src="/images/wms_ids_thumbnail.jpg" alt="wms" />
+            </div>
+            <div class="clearfix"></div>
+            <div class="row" style="margin-left:-26px; margin-right:-26px">
+                <form id="login-form" method="post" asp-route="Login" name="loginForm" ng-style="ShowCaptcha?'':{width: '280px'}">
+                    <div class="form-group">
+                        <anti-forgery-token token="model.antiForgery"></anti-forgery-token>
+                        <label asp-for="Username">Tên đăng nhập</label>
+                        <input type="text" asp-for="Username" class="form-control" name="username" required ng-model="model.username" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Mật khẩu</label>
+                        <input type="password" asp-for="Password" class="form-control" name="password" required ng-model="model.password">
+                    </div>
+                    <section>
+                        <div class="note" style="color: #EA377C;margin-top: 7px;font-size: 15px;">
+                            @if (ViewContext.ModelState.IsValid == false)
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>Lỗi đăng nhập</strong>
+                                    <div asp-validation-summary="All" class="danger"></div>
+                                </div>
+                            }
+                        </div>
+                    </section>
+                    <footer ng-style="ShowCaptcha?{'margin-top': '10px'}:{'margin-top': '20px'}">
+                        <button id="btnLogin" value="login" name="button" class="btn btn-login">Đăng nhập</button>
+                    </footer>
+                    <input type="hidden" id="CapchaToken" asp-for="CapchaToken" class="form-control" name="CapchaToken">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LdAUzkdAAAAAPd0kmbf0Wfwb7wc5HAJo6s9geA5', { action: 'register' })
+                .then(function (token) {
+                    $("#CapchaToken").val(token);
+                });
+        });
+    </script>
+    <script type="text/javascript">
+        function scaleCaptcha(elementWidth) {
+            // Width of the reCAPTCHA element, in pixels
+            var reCaptchaWidth = 304;
+            // Get the containing element's width
+            var containerWidth = $('body').width();
+
+            // Only scale the reCAPTCHA if it won't fit
+            // inside the container
+            if (reCaptchaWidth > containerWidth) {
+                // Calculate the scale
+                var captchaScale = containerWidth / reCaptchaWidth;
+                // Apply the transformation
+                $('.g-recaptcha').css({
+                    'transform': 'scale(' + captchaScale + ')'
+                });
+            }
+        }
+        $(function () {
+            scaleCaptcha();
+        });
+    </script>
+</body>
+</html>

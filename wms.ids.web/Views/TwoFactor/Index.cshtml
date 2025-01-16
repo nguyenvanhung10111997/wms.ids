@@ -1,0 +1,174 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using wms.infrastructure.Helpers;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=11">
+    <title> WMS Identity Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- #CSS Links -->
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/coc/css/bootstrap.min.css">
+    <link href="/lib/content/themes/coc/css/animate.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/coc/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/lib/content/themes/coc/csslogin_style.css?v=1">
+    <!-- #FAVICONS -->
+    <link rel="shortcut icon" href="/images/wms_icon.png" type="image/x-icon">
+    <link rel="icon" href="/images/wms_icon.png" type="image/x-icon">
+    <script src='https://www.google.com/recaptcha/api.js?hl=vi'></script>
+    <script src='https://www.google.com/recaptcha/api.js?render=6LdAUzkdAAAAAPd0kmbf0Wfwb7wc5HAJo6s9geA5'></script>
+    <script src="~/lib/angular/angular.1.2.13.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+@{
+    var TwoFAAttempts = SessionHelper.GetString(httpContextAccessor.HttpContext.Session, "TwoFAAttempts");
+}
+
+<body class="login-page" style="background-image:url('/Content/themes/coc/img/bg-login-3.png');background-position:center">
+    <div class="container">
+        <div class="box-login">
+            <div id="login-logo" class="col-md-12">
+                <img src="/lib/content/themes/coc/img/logo-new-2.png" alt="concung" />
+            </div>
+            <div class="clearfix"></div>
+            <div class="row" style="margin-left:-26px; margin-right:-26px">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <form id="login-form" method="post" action="/identity/TwoFactor/Verify">
+                        <div class="form-group">
+                            <label>Mã bảo mật cấp 2</label>
+                            <input type="text" class="form-control" name="passcode" />
+                        </div>
+                        @if (!string.IsNullOrEmpty(TwoFAAttempts))
+                        {
+                            <section>
+                                <div class="note" style="color: #ff0000;margin-top: 7px;font-size: 15px;">
+                                    <div>
+                                        Bạn còn @TwoFAAttempts lần thử lại
+                                    </div>
+                                </div>
+                            </section>
+                        }
+                        <section>
+                            <div class="note" style="color: #EA377C;margin-top: 7px;font-size: 15px;">
+                                <div>
+                                    @ViewBag.Message
+                                </div>
+                            </div>
+                        </section>
+                        <footer style="margin-top: 20px;">
+                            <button type="submit" id="btnLogin" class="btn btn-login">Đăng nhập</button>
+                            <div style="clear:both">&nbsp;</div>
+                        </footer>
+                        <input id="returnurl" name="returnurl" type="hidden" value="@ViewBag.ReturnURL">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-image">
+
+    </div>
+    <script src="/content/libs/jquery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        var GCount = 1;
+        var BgStyle1 = {
+            "background-image": "url('/Content/themes/coc/img/bg-login-1.png')",
+            "background-position": "bottom right"
+
+        };
+        var BgStyle2 = {
+            "background-image": "url('/Content/themes/coc/img/bg-login-3.png')",
+            "background-position": "center"
+        };
+        var BgStyle3 = {
+            "background-image": "url('/Content/themes/coc/img/bg-login-4.png')",
+            "background-position": "center right"
+        };
+        //var BgStyle4 = {
+        //    "background-image": "url('/Content/themes/coc/img/bg-login-5.png')",
+        //    "background-position": "center bottom"
+        //};
+        var BgStyle5 = {
+            "background-image": "url('/Content/themes/coc/img/bg-login-2.jpg')",
+            //"background-position": "top right"
+            "background-position": "center center"
+        };
+
+        function scaleCaptcha(elementWidth) {
+            // Width of the reCAPTCHA element, in pixels
+            var reCaptchaWidth = 304;
+            // Get the containing element's width
+            var containerWidth = $('body').width();
+
+            // Only scale the reCAPTCHA if it won't fit
+            // inside the container
+            if (reCaptchaWidth > containerWidth) {
+                // Calculate the scale
+                var captchaScale = containerWidth / reCaptchaWidth;
+                // Apply the transformation
+                $('.g-recaptcha').css({
+                    'transform': 'scale(' + captchaScale + ')'
+                });
+            }
+        }
+        $(function () {
+
+            // Initialize scaling
+            scaleCaptcha();
+
+            // Update scaling on window resize
+            // Uses jQuery throttle plugin to limit strain on the browser
+            //$(window).resize($.throttle(100, scaleCaptcha));
+            setInterval(function () {
+                switch (GCount) {
+                    case 1:
+                        setBackgroud(BgStyle1);
+                        GCount++;
+                        break;
+                    case 2:
+                        setBackgroud(BgStyle2);
+                        GCount++;
+                        break;
+                    case 3:
+                        setBackgroud(BgStyle3);
+                        GCount++;
+                        break;
+                    case 4:
+                        setBackgroud(BgStyle4);
+                        GCount++;
+                        break;
+                    case 5:
+                        setBackgroud(BgStyle5);
+                        GCount = 1;
+                        break;
+                }
+
+            }, 10000);
+        });
+
+        function setBackgroud(obj) {
+            $("body").css(obj);
+        }
+
+        $("#btnSendCodeToEmail").click(function () {
+            $("#btnSendCodeToEmail").prop("disabled", true);
+            $.ajax({
+                url: '/identity/TwoFactor/SendCodeToEmail',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (res) {
+                    $("#btnSendCodeToEmail").prop("disabled", false);
+                    alert('Đã gửi mã xác thực đến email, vui lòng kiểm tra email.');
+                },
+                error: function (res) {
+                    $("#btnSendCodeToEmail").prop("disabled", false);
+                    alert('Lỗi gửi mã xác thực đến email, vui lòng thử lại');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

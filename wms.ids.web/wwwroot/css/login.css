@@ -1,0 +1,115 @@
+﻿@font-face {
+    font-family: My Segoeui;
+    src: url(/lib/content/themes/coc/fonts/segoeui/segoeui.woff2) format('woff2'), /* Super Modern Browsers */
+    url('/lib/content/themes/coc/fonts/segoeui/SegoeUI.woff') format('woff'), /* Pretty Modern Browsers */
+    url('/lib/content/themes/coc/fonts/segoeui/segoeui.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/lib/lib/content/themes/coc/fonts/segoeui/SegoeUI.svg#svgFontName') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: My Segoeui;
+    src: url(/lib/content/themes/coc/fonts/segoeui/segoeuib.woff2) format('woff2'), /* Super Modern Browsers */
+    url('/lib/content/themes/coc/fonts/segoeui/SegoeUI-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+    url('/lib/content/themes/coc/fonts/segoeui/segoeuib.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/lib/content/themes/coc/fonts/segoeui/SegoeUI-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: My Segoeui;
+    src: url(/lib/content/themes/coc/fonts/segoeui/seguisb.woff2) format('woff2'), /* Super Modern Browsers */
+    url('/lib/content/themes/coc/fonts/segoeui/SegoeUI-Semibold.woff') format('woff'), /* Pretty Modern Browsers */
+    url('/lib/content/themes/coc/fonts/segoeui/seguisb.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/lib/content/themes/coc/fonts/segoeui/SegoeUI-Semibold.svg#svgFontName') format('svg'); /* Legacy iOS */
+    font-weight: 500;
+}
+
+html {
+    height: 100%;
+}
+
+.login-page {
+    height: 100%;
+    background: #fde3ea;
+    font-family: 'My Segoeui';
+    -webkit-transition: background-image 1s ease;
+    transition: background 1s ease;
+}
+
+    .login-page .container {
+        height: 100%;
+        display: table;
+    }
+
+.box-login {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0;
+    margin-left: -26px;
+    margin-right: -26px;
+}
+
+#login-form, .login-form {
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    background: #fffbfc;
+    padding: 20px;
+    color: #666;
+    max-width: 344px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.3), 0 15px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.3), 0 15px 15px rgba(0, 0, 0, 0.06);
+}
+
+    #login-form label, .login-form label {
+        font-weight: normal;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    #login-form input.form-control, .login-form input.form-control {
+        border-radius: 2px;
+    }
+
+#login-logo {
+    margin-bottom: 30px;
+    margin-top: -50px;
+    text-align: center;
+}
+
+    #login-logo > img {
+        width: 340px;
+    }
+
+.btn-login {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #0190f3;
+    border-color: #0184e0;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fefefe;
+    -webkit-box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
+}
+
+    .btn-login:hover, .btn-login:active, .btn-login:focus {
+        color: #fefefe;
+        background-color: #0184e0
+    }
+
+@media (max-width: 350px) {
+    #login-logo > img {
+        width: 250px;
+        padding-top: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    #login-logo > img {
+        width: 300px;
+    }
+}
